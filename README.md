@@ -8,4 +8,4 @@ Three class:
 
 Very clearly show the details of A star, und just run it!!
 
-[Img]([./Path.png]
+[Img]([./Path.png])
