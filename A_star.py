@@ -105,19 +105,20 @@ class Astar:
     def plot_path(self, path):
         # Plot
         plt.figure("Path")
-        plt.xlim(0, 20)
-        plt.ylim(0, 20)
+        plt.xlim(0, len(my_map))
+        plt.ylim(0, len(my_map[0]))
         plt.grid(True, axis='both')
-        plt.xticks(np.arange(-1,20,1))
-        plt.yticks(np.arange(-1,20,1))
+        plt.xticks(np.arange(-1,len(my_map),1))
+        plt.yticks(np.arange(-1,len(my_map[0]),1))
+
         for x, y in itertools.product(range(len(my_map)-1), range(len(my_map[0])-1)):
             if my_map[x][y] == 0:
                 plt.scatter(x, y, c = 'b')
                 plt.pause(0.1)
-        plt.plot([0, 8], [0, 15], 'o', color='red')
+        plt.plot([self.map.start_x, self.map.end_x], [self.map.start_y, self.map.end_y], 'o', color='red')
         for v in path:
-            plt.plot(v[0], v[1], 'o', color='green')
             plt.pause(1)   
+            plt.plot(v[0], v[1], 'o', color='green')
         plt.plot([v[0] for v in path], [v[1] for v in path], color = 'red')
         plt.show()
     
@@ -133,8 +134,10 @@ if __name__ == "__main__":
     [1,1,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1],
     [1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1]
     ]
-    
-    map = Map(my_map,0,0,8,15)
+    start_x , start_y = 0, 0
+    end_x, end_y = 8, 15
+    map = Map(my_map,start_x, start_y, end_x, end_y)
+
     a_star = Astar(map)
     node = a_star.solve_star()
     path = a_star.save_path(node)
